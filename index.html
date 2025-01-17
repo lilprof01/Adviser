@@ -17,7 +17,8 @@
     <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
     <style>
       body {
-        background-image: url(./Anime\ wallpaper/1334857.png);
+        /* background-image: url(./Anime\ wallpaper/1334857.png); */
+        background-color: hsl(218, 23%, 16%);
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -26,7 +27,8 @@
       }
 
       .fade-out {
-        opacity: 7;
+        opacity: 0;
+        transition: opacity 0.8s ease;
       }
 
       .attribution {
@@ -50,7 +52,7 @@
         height: 200px;
         width: 400px;
         margin: 0 auto;
-        background-color: hsla(218, 23%, 16%, 0.792);
+        background-color: hsl(217, 19%, 24%);
         display: flex;
         flex-direction: column;
         justify-content: start;
@@ -58,6 +60,7 @@
         text-align: center;
         gap: 20px;
         text-wrap: wrap;
+        border-radius: 20px;
       }
 
       .text-container {
@@ -195,12 +198,12 @@
       button.addEventListener("click", async () => {
         try {
           console.log("fetching advice");
-          document.body.classList.add("fade-out");
+          adviceText.classList.add("fade-out");
 
           // Wait for the fade-out animation to complete (800ms)
           setTimeout(async () => {
-            const randomIndex = Math.floor(Math.random() * bg.length);
-            document.body.style.backgroundImage = `url(${bg[randomIndex]})`;
+            // const randomIndex = Math.floor(Math.random() * bg.length);
+            // document.body.style.backgroundImage = `url(${bg[randomIndex]})`;
 
             const response = await fetch("https://api.adviceslip.com/advice");
             const data = await response.json();
@@ -209,7 +212,7 @@
             Id.textContent = `Advice #${data.slip.id}`;
 
             // Fade back in after background is updated
-            document.body.classList.remove("fade-out");
+            adviceText.classList.remove("fade-out");
           }, 800);
         } catch (error) {
           console.log("Error fetching data", error);
